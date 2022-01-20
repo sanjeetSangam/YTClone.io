@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="video.css" />
+  </head>
+  <body>
+    <div id="container">
+      <header>
+        <!-- logo part -->
+
+        <div id="logo">
+          <a href="#"><img src="menu.svg" alt="" id="menu" /></a>
+          <a href="home.html"><img src="logo.png" alt="" id="yt" /></a>
+        </div>
+
+        <!-- search bar -->
+        <div id="search">
+          <input type="text" placeholder="Search" id="searchValue" />
+          <button id="iconS">
+            <img src="search.svg" alt="" id="srch" onclick="displayContent()" />
+          </button>
+          <img src="mic.svg" alt="" id="mic" />
+        </div>
+
+        <!-- right icon -->
+        <div id="right">
+          <a href=""><img src="upload.svg" alt="" /></a>
+          <a href=""><img src="notifications.svg" alt="" /></a>
+          <a href=""><img src="menu (1).svg" alt="" /></a>
+        </div>
+      </header>
+
+      <!-- content -->
+      <div id="content">
+        <div id="videoDetails">
+          <iframe
+            id="if"
+            width="1100px"
+            height="700px"
+            src=""
+            title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+
+          <div id="details">
+            <p id="title1"></p>
+            <div id="like">
+              <p id="v"></p>
+              <div id="l">
+                <div class="like">
+                  <img src="like.svg" alt="" />
+                  <p>like</p>
+                </div>
+                <div class="like">
+                  <img src="dislike.svg" alt="" />
+                  <p>dislike</p>
+                </div>
+                <div class="like">
+                  <img src="share.svg" alt="" />
+                  <p>share</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div id="chnl">
+            <div id="thmb">
+              <img src="" alt="" id="art" />
+              <p id="chn"></p>
+            </div>
+
+            <button>SUBSCRIBE</button>
+          </div>
+          <p id="des"></p>
+        </div>
+
+        <div id="top">
+          <button>Trending</button>
+          <div id="dikhao"></div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+
+<script>
+  var key = "AIzaSyCIWZm0KYz1ipQIJEEDTbDyX2-kbzPTvbg";
+  var videoData = JSON.parse(localStorage.getItem("video"));
+
+  // console.log(videoData);
+  let showvideo = ({
+    snippet,
+    videoId,
+    id,
+    channelThumb,
+    viewCount,
+    subscriberCount,
+  }) => {
+    let title = snippet.title;
+    let url = snippet.thumbnails.high.url;
+    let channelTitle = snippet.channelTitle;
+    let description = snippet.description;
+
+    // console.log(item.id);
+
+    document.getElementById("if").src = `https://www.youtube.com/embed/${id}`;
+
+    title1.innerText = title;
+    chn.innerText = channelTitle;
+    des.innerText = description;
+    art.src = channelThumb;
+    v.innerText = `${viewCount} views`;
+  };
+
+  showvideo(videoData);
+
+  let popular = async () => {
+    const rD = await fetch(
+      `https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&regionCode=US&key=${key}&maxResults=30`
+    );
+
+    const rD1 = await rD.json();
+
+    displayP(rD1);
+  };
+
+  popular();
+
+  let displayP = ({ items }) => {
+    items.forEach(({ snippet, statistics }) => {
+      console.log(snippet);
+      const thumb = snippet.thumbnails.high.url;
+      const title = snippet.title;
+      const channelN = snippet.channelTitle;
+
+      let list = document.createElement("div");
+      list.setAttribute("id", "list");
+
+      var list1 = document.createElement("div");
+      list1.setAttribute("id", "lis1");
+
+      var imgD = document.createElement("div");
+      imgD.setAttribute("id", "img");
+
+      let th = document.createElement("img");
+      th.src = thumb;
+
+      let t = document.createElement("H4");
+      t.innerText = title;
+
+      let chN = document.createElement("p");
+      chN.innerText = channelN;
+
+      imgD.append(th);
+
+      list1.append(t, chN);
+
+      list.append(imgD, list1);
+
+      dikhao.append(list);
+    });
+  };
+</script>

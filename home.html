@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="home.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="container">
+      <header>
+        <!-- logo part -->
+
+        <div id="logo">
+          <a href="#"><img src="menu.svg" alt="" id="menu" /></a>
+          <a href="home.html"><img src="logo.png" alt="" id="yt" /></a>
+        </div>
+
+        <!-- search bar -->
+        <div id="search">
+          <input type="text" placeholder="Search" id="searchValue" />
+          <button id="iconS">
+            <img src="search.svg" alt="" id="srch" onclick="displayContent()" />
+          </button>
+          <img src="mic.svg" alt="" id="mic" />
+        </div>
+
+        <!-- right icon -->
+        <div id="right">
+          <a href=""><img src="upload.svg" alt="" /></a>
+          <a href=""><img src="notifications.svg" alt="" /></a>
+          <a href=""><img src="menu (1).svg" alt="" /></a>
+        </div>
+      </header>
+
+      <!-- content -->
+      <div id="content"></div>
+    </div>
+  </body>
+</html>
+
+<script>
+  var key = "AIzaSyCIWZm0KYz1ipQIJEEDTbDyX2-kbzPTvbg";
+
+  async function displayContent() {
+    try {
+      content.innerHTML = null;
+      let searchValue = document.getElementById("searchValue").value;
+
+      let rawData = await fetch(
+        `https://youtube.googleapis.com/youtube/v3/search?&q=${searchValue}&key=${key}&type=video&maxResults=30&part=snippet`
+      );
+
+      // console.log(rawData)
+
+      const newRaw = await rawData.json();
+
+      const data = newRaw.items;
+
+      linkvideos(data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async function linkvideos(data) {
+    data.forEach(async ({ snippet, id: { videoId } }) => {
+      let title = snippet.title;
+      let url = snippet.thumbnails.high.url;
+      let channelTitle = snippet.channelTitle;
+      let channelId = snippet.channelId;
+      // console.log(channelId);
+
+      const chnldata = await fetch(
+        `https://youtube.googleapis.com/youtube/v3/channels?part=snippet%2CcontentDetails%2Cstatistics&id=${channelId}&key=${key}`
+      );
+
+      const chData = await chnldata.json();
+      // console.log(chData);
+
+      const channelThumb = await chData.items[0].snippet.thumbnails.high.url;
+      const subscriberCount = await chData.items[0].statistics.subscriberCount;
+
+      const stats = await fetch(
+        `https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&id=${videoId}&key=${key}`
+      );
+
+      const statS1 = await stats.json();
+      // console.log(statS1);
+
+      const viewCount = await statS1.items[0].statistics.viewCount;
+      const likeCount = await statS1.items[0].statistics.likeCount;
+      const commentCount = await statS1.items[0].statistics.commentCount;
+      const dislikeCount = await statS1.items[0].statistics.dislikeCount;
+
+      let id = await videoId;
+
+      // console.log(channelThumb);
+
+      let video_data = {
+        snippet,
+        id,
+        channelThumb,
+        subscriberCount,
+        viewCount,
+        likeCount,
+        commentCount,
+        dislikeCount,
+      };
+
+      console.log(id);
+
+      let list = document.createElement("div");
+      list.setAttribute("id", "list");
+
+      //calling function for next page for video playback
+
+      list.onclick = () => {
+        viewVideo(video_data);
+      };
+
+      let thumbnail = document.createElement("img");
+      thumbnail.src = url;
+
+      let titleH = document.createElement("p");
+      titleH.setAttribute("id", "ttl");
+      titleH.innerText = title;
+      titleH.style.fontWeight = "bold";
+      titleH.style.fontSize = "15px";
+
+      let ct = document.createElement("div");
+      ct.setAttribute("id", "ct");
+
+      let main = document.createElement("div");
+      main.setAttribute("id", "main");
+
+      let chnlTh = document.createElement("img");
+      chnlTh.src = channelThumb;
+      chnlTh.setAttribute("id", "art");
+
+      let tt = document.createElement("div");
+      tt.setAttribute("id", "tt");
+
+      let chnl = document.createElement("P");
+      chnl.setAttribute("id", "channelName");
+      chnl.innerText = channelTitle;
+
+      let t = document.createElement("div");
+      t.setAttribute("id", "t");
+      t.append(titleH);
+
+      main.append(chnlTh);
+
+      tt.append(t, chnl);
+
+      ct.append(main, tt);
+
+      list.append(thumbnail, ct);
+
+      content.append(list);
+    });
+  }
+
+  let popular = async () => {
+    const rD = await fetch(
+      `https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&regionCode=IN&key=${key}&maxResults=30`
+    );
+
+    const rD1 = await rD.json();
+    // console.log(rD1);
+    content.innerHTML = null;
+
+    displayP(rD1);
+  };
+
+  popular();
+
+  let displayP = ({ items }) => {
+    items.forEach(async ({ snippet, id }) => {
+      // console.log(snippet);
+      let title = snippet.title;
+      let url = snippet.thumbnails.high.url;
+      let channelTitle = snippet.channelTitle;
+      let channelId = snippet.channelId;
+
+      // console.log(id);
+
+      const chnldata = await fetch(
+        `https://youtube.googleapis.com/youtube/v3/channels?part=snippet%2CcontentDetails%2Cstatistics&id=${channelId}&key=${key}`
+      );
+
+      const chData = await chnldata.json();
+      // console.log(chData);
+
+      const channelThumb = await chData.items[0].snippet.thumbnails.high.url;
+      const subscriberCount = await chData.items[0].statistics.subscriberCount;
+
+      const stats = await fetch(
+        `https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&id=${id}&key=${key}`
+      );
+
+      const statS1 = await stats.json();
+      // console.log(statS1);
+
+      const viewCount = await statS1.items[0].statistics.viewCount;
+      const likeCount = await statS1.items[0].statistics.likeCount;
+      const commentCount = await statS1.items[0].statistics.commentCount;
+      const dislikeCount = await statS1.items[0].statistics.dislikeCount;
+
+      let list = document.createElement("div");
+      list.setAttribute("id", "list");
+
+      //calling function for next page for video playback
+
+      let video_data = {
+        snippet,
+        id,
+        channelThumb,
+        subscriberCount,
+        viewCount,
+        likeCount,
+        commentCount,
+        dislikeCount,
+      };
+
+      // console.log(video_data);
+
+      list.onclick = () => {
+        viewVideo(video_data);
+      };
+
+      let thumbnail = document.createElement("img");
+      thumbnail.src = url;
+
+      let titleH = document.createElement("p");
+      titleH.setAttribute("id", "ttl");
+      titleH.innerText = title;
+      titleH.style.fontWeight = "bold";
+      titleH.style.fontSize = "15px";
+
+      let ct = document.createElement("div");
+      ct.setAttribute("id", "ct");
+
+      let main = document.createElement("div");
+      main.setAttribute("id", "main");
+
+      let chnlTh = document.createElement("img");
+      chnlTh.src = channelThumb;
+      chnlTh.setAttribute("id", "art");
+
+      let tt = document.createElement("div");
+      tt.setAttribute("id", "tt");
+
+      let chnl = document.createElement("P");
+      chnl.setAttribute("id", "channelName");
+      chnl.innerText = channelTitle;
+
+      let t = document.createElement("div");
+      t.setAttribute("id", "t");
+      t.append(titleH);
+
+      main.append(chnlTh);
+
+      tt.append(t, chnl);
+
+      ct.append(main, tt);
+
+      list.append(thumbnail, ct);
+
+      content.append(list);
+    });
+  };
+
+  const viewVideo = (video_data) => {
+    localStorage.setItem("video", JSON.stringify(video_data));
+    window.location.href = "video.html";
+  };
+</script>

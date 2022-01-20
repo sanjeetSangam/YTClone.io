@@ -1,0 +1,244 @@
+@import url("https://fonts.googleapis.com/css2?family=Gothic+A1:wght@200&family=Montserrat:wght@400;800&family=Zen+Kaku+Gothic+Antique:wght@300;400;900&display=swap");
+
+* {
+  font-family: "Zen Kaku Gothic Antique", sans-serif;
+}
+
+header {
+  /* border: 1px solid blue; */
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  /* align-items: center; */
+  position: fixed;
+  top: 0;
+  right: 30px;
+  left: 10px;
+  height: 60px;
+  margin-bottom: 30px;
+  padding-top: 20px;
+  background-color: white;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+    rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+}
+
+header > img {
+  margin-left: 5px;
+  height: 40px;
+  width: 40px;
+}
+
+#logo {
+  height: 35px;
+  width: 120px;
+  display: flex;
+  align-items: center;
+}
+
+#logo #menu {
+  width: 25px;
+  height: 25px;
+  margin-left: 5px;
+}
+
+#logo #yt {
+  width: 120px;
+  margin-left: 5px;
+}
+
+#search {
+  /* border: 1px solid red; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 600px;
+  height: 35px;
+}
+
+#search input {
+  border: 1px solid rgb(197, 196, 196);
+  height: 87%;
+  padding: 5px;
+  padding-left: 15px;
+  font-size: 15px;
+  width: 500px;
+  border-right: none;
+}
+
+#search button {
+  padding: 5.6px;
+  border: 1px solid rgb(197, 196, 196);
+  background: none;
+  width: 80px;
+}
+
+#srch {
+  height: 30px;
+}
+
+#search img {
+  height: 25px;
+}
+
+#mic {
+  margin-left: 20px;
+  height: 25px;
+}
+
+#right {
+  /* border: 1px solid blue; */
+  height: 35px;
+  width: 200px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+#right a img {
+  height: 25px;
+  width: 25px;
+}
+
+#content {
+  /* border: 1px solid red; */
+  height: 1100px;
+  margin: auto;
+  width: 1620px;
+  margin-top: 100px;
+  padding-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  overflow: scroll;
+}
+
+#videoDetails {
+  /* border: 1px solid red; */
+  max-width: 1100px;
+}
+
+#details {
+  /* border: 1px solid blue; */
+  /* height: 100px; */
+  width: 1100px;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px;
+}
+
+#details > p {
+  font-weight: bolder;
+  font-size: 19px;
+}
+
+#like {
+  /* border: 1px solid red; */
+  /* width: 250px; */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-right: 5px;
+  /* padding-left: 78%; */
+}
+
+#l {
+  /* border: 1px solid black; */
+  display: flex;
+  width: 250px;
+  justify-content: space-between;
+}
+
+.like {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.like > p {
+  margin-left: 5px;
+}
+
+.like img {
+  height: 25px;
+  width: 25px;
+}
+
+#chnl {
+  /* border: 1px solid blue; */
+  height: 80px;
+  /* width: 900px; */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* margin-top: 10px; */
+  box-shadow: rgba(0, 0, 0, 0.18) 0px 2px 4px;
+}
+
+#chnl button {
+  background-color: red;
+  color: white;
+  border: none;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  font-size: 16px;
+  height: 40px;
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+#chn {
+  font-weight: bold;
+  margin-left: 10px;
+}
+
+#des {
+  padding-left: 10px;
+  max-height: 500px;
+  overflow: scroll;
+}
+
+#thmb {
+  /* border: 1px solid blue; */
+  height: 50px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+#art {
+  height: 35px;
+  width: 35px;
+  border-radius: 50%;
+  margin-left: 10px;
+}
+
+#top {
+  /* border: 1px solid black; */
+  width: 450px;
+}
+
+#top button {
+  padding-left: 10px;
+  margin-bottom: 10px;
+}
+
+#list {
+  /* border: 1px solid black; */
+  width: 100%;
+  /* height: 130px; */
+  display: flex;
+  margin-bottom: 10px;
+}
+
+#dikhao {
+  height: 1100px;
+  overflow: scroll;
+}
+
+#img {
+  height: 130px;
+  margin-right: 5px;
+}
+
+#img img {
+  height: 100%;
+}

@@ -1,0 +1,161 @@
+@import url("https://fonts.googleapis.com/css2?family=Gothic+A1:wght@200&family=Montserrat:wght@400;800&family=Zen+Kaku+Gothic+Antique:wght@300;400;900&display=swap");
+
+* {
+  font-family: "Zen Kaku Gothic Antique", sans-serif;
+}
+
+header {
+  /* border: 1px solid blue; */
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  /* align-items: center; */
+  position: fixed;
+  top: 0;
+  right: 10px;
+  left: 10px;
+  height: 60px;
+  margin-bottom: 30px;
+  padding-top: 20px;
+  background-color: white;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+    rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+}
+
+header > img {
+  margin-left: 5px;
+  height: 40px;
+  width: 40px;
+}
+
+#logo {
+  height: 35px;
+  width: 120px;
+  display: flex;
+  align-items: center;
+}
+
+#logo #menu {
+  width: 25px;
+  height: 25px;
+  margin-left: 5px;
+}
+
+#logo #yt {
+  width: 120px;
+  margin-left: 5px;
+}
+
+#search {
+  /* border: 1px solid red; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 600px;
+  height: 35px;
+}
+
+#search input {
+  border: 1px solid rgb(197, 196, 196);
+  height: 87%;
+  padding: 5px;
+  padding-left: 15px;
+  font-size: 15px;
+  width: 500px;
+  border-right: none;
+}
+
+#search button {
+  padding: 5.6px;
+  border: 1px solid rgb(197, 196, 196);
+  background: none;
+  width: 80px;
+}
+
+#srch {
+  height: 30px;
+}
+
+#search img {
+  height: 25px;
+}
+
+#mic {
+  margin-left: 20px;
+  height: 25px;
+}
+
+#right {
+  /* border: 1px solid blue; */
+  height: 35px;
+  width: 200px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+#right a img {
+  height: 25px;
+  width: 25px;
+}
+
+#content {
+  /* border: 1px solid blue; */
+  margin-top: 100px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+#list {
+  /* border: 1px solid black; */
+  /* height: 390px; */
+  width: 300px;
+  margin-top: 15px;
+  margin-bottom: 10px;
+}
+
+#list img {
+  height: 210px;
+  width: 100%;
+  cursor: pointer;
+}
+
+#list p {
+  padding-left: 10px;
+}
+
+#ct {
+  /* border: 1px solid red; */
+  display: flex;
+  justify-content: space-between;
+  line-height: 18px;
+}
+
+#t {
+  /* border: 1px solid blue; */
+  height: 55px;
+  overflow: hidden;
+}
+
+#tt {
+  width: 80%;
+  /* border: 1px solid red; */
+  cursor: pointer;
+}
+
+#main {
+  margin-top: 15px;
+  margin-left: 5px;
+  /* border: 1px solid red; */
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+}
+
+#main img {
+  height: 100%;
+  width: 100%;
+  border-radius: 50%;
+}
